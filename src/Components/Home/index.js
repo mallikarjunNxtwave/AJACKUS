@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import ClipLoader from "react-spinners/ClipLoader";
 import './index.css'
 import Users from '../Users'
 
@@ -47,8 +48,40 @@ class Home extends Component {
         }
     }
 
+    onClickTryAgain = () => {
+        this.GetUsers()
+    }
+
+    renderOutput = () => {
+        const { apiStatus, usersList } = this.state
+        switch (apiStatus) {
+            case "SUCCESS":
+                return (
+                    <div className='users-container'>
+                        {usersList.map(each => (
+                            <Users userDetails={each} />
+                        ))}
+                    </div>
+                )
+            case "FAILURE":
+                return (
+                    <div className='failure-container'>
+                        <h1 className='failure-text'>FAILURE</h1>
+                        <p className='failure-description'>We are not getting users.</p>
+                        <p className='failure-description'>Please try again</p>
+                        <button className='try-again-button' type='button' onClick={this.onClickTryAgain}>Try Again</button>
+                    </div>
+                )
+            default:
+                return (
+                    <div className='loader-container'>
+                        <ClipLoader color='#1E2ADE' size={50} />
+                    </div>
+                )
+        }
+    }
+
     render() {
-        const { usersList } = this.state
         return (
             <div className='home-container'>
                 <div className='logo-container'>
@@ -58,11 +91,7 @@ class Home extends Component {
                 <div className='add-button-container'>
                     <button type='button' className='add-button'>Add User</button>
                 </div>
-                <div className='users-container'>
-                    {usersList.map(each => (
-                        <Users userDetails={each}/>
-                    ))}
-                </div>
+                {this.renderOutput()}
             </div>
         )
     }

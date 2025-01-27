@@ -9,7 +9,7 @@ const App = () => {
     <BrowserRouter>
     <Routes>
       <Route exact path='/' Component={Home}/>
-      <Route exact path='error' Component={Error} />
+      <Route path='*' Component={Error} />
     </Routes>
     </BrowserRouter>
   )
