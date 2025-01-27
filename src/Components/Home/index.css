@@ -90,3 +90,10 @@
     width: 100%;
     margin-top: 200px;
 }
+
+.error-msg {
+    font-family: "Roboto";
+    font-size: 10px;
+    font-weight: bold;
+    color: #b00606;
+}

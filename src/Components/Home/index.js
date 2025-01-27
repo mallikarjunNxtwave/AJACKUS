@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import ClipLoader from "react-spinners/ClipLoader";
+import Popup from 'reactjs-popup';
 import './index.css'
 import Users from '../Users'
 
@@ -30,14 +31,20 @@ class Home extends Component {
             const response = await fetch(url)
             if (response.ok) {
                 const data = await response.json()
+                const modifiedUsersList = data.map(each => ({
+                    id: each.id,
+                    name: each.name,
+                    username: each.username,
+                    email: each.email,
+                    company: each.company.name
+                }))
                 this.setState({
-                    usersList: data,
+                    usersList: modifiedUsersList,
                     apiStatus: apiStatuses.success
                 })
             } else {
                 this.setState({
                     apiStatus: apiStatuses.failure,
-                    errorMsg: 'Error'
                 })
             }
         } catch (error) {
@@ -53,11 +60,41 @@ class Home extends Component {
     }
 
     deleteUser = async id => {
-        const {usersList} = this.state
+        const { usersList } = this.state
         const url = `https://jsonplaceholder.typicode.com/users/${id}`
-        fetch(url, {method: 'DELETE'})
+        await fetch(url, { method: 'DELETE' })
         const filteredUsers = usersList.filter(each => each.id !== id)
-        this.setState({usersList: filteredUsers})
+        this.setState({ usersList: filteredUsers })
+    }
+
+    editUser = async (id, userDetails) => {
+        const { usersList } = this.state
+        const url = `https://jsonplaceholder.typicode.com/users/${id}`
+        await fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(userDetails),
+            headers: {
+                'Content-type': "application/json"
+            }
+        })
+        const editedUsers = usersList.map(each => {
+            if (each.id === id) {
+                return {
+                    id,
+                    name: userDetails.name || each.name,
+                    username: userDetails.username || each.name,
+                    email: userDetails.email || each.email,
+                    company: userDetails.company || each.company
+                }
+            }
+            return each
+        })
+        this.setState({ usersList: editedUsers, errorMsg: '' })
+
+    }
+
+    editError = msg => {
+        this.setState({ errorMsg: msg })
     }
 
     renderOutput = () => {
@@ -67,7 +104,7 @@ class Home extends Component {
                 return (
                     <div className='users-container'>
                         {usersList.map(each => (
-                            <Users userDetails={each} deleteUser={this.deleteUser} />
+                            <Users userDetails={each} deleteUser={this.deleteUser} editUser={this.editUser} editError={this.editError} />
                         ))}
                     </div>
                 )
@@ -90,6 +127,7 @@ class Home extends Component {
     }
 
     render() {
+        const { errorMsg } = this.state
         return (
             <div className='home-container'>
                 <div className='logo-container'>
@@ -99,6 +137,7 @@ class Home extends Component {
                 <div className='add-button-container'>
                     <button type='button' className='add-button'>Add User</button>
                 </div>
+                {errorMsg !== '' ? <p className='error-msg'>*{errorMsg}</p> : null}
                 {this.renderOutput()}
             </div>
         )
