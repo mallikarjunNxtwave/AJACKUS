@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+.home-container {
+    width: 100%;
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    font-family: "Bree Serif";
+    padding-right: 6px;
+    padding-left: 6px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border: solid 3px #f47208;
+    border-radius: 2px;
+    margin-right: 5px;
+    font-size: 20px;
+    color: #3518b6;
+}
+
+.company-name {
+    font-family: "Roboto";
+    font-size: 25px;
+    font-weight: bold;
+    color: #f47208;
+    text-decoration: underline;
+}
+
+.add-button-container {
+    width: 100%;
+    text-align: end;
+}
+
+.add-button {
+    margin-right: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: solid 1px #979a9b;
+    border-radius: 3px;
+    color: #170e40;
+    font-family: "Roboto";
+    font-size: 13px;
+    font-weight: 600;
+}
