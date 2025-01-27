@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import './index.css'
+import Users from '../Users'
 
 const apiStatuses = {
     initial: 'INITIAL',
@@ -15,7 +16,7 @@ class Home extends Component {
         errorMsg: ''
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.GetUsers()
     }
 
@@ -26,25 +27,28 @@ class Home extends Component {
         try {
             const url = 'https://jsonplaceholder.typicode.com/users'
             const response = await fetch(url)
-            if(response.ok){
+            if (response.ok) {
                 const data = await response.json()
                 this.setState({
                     usersList: data,
                     apiStatus: apiStatuses.success
                 })
-            }else {
+            } else {
                 this.setState({
                     apiStatus: apiStatuses.failure,
                     errorMsg: 'Error'
                 })
             }
         } catch (error) {
-            
+            this.setState({
+                apiStatus: apiStatuses.failure,
+                errorMsg: error.message
+            })
         }
     }
 
     render() {
-        const {usersList} = this.state
+        const { usersList } = this.state
         return (
             <div className='home-container'>
                 <div className='logo-container'>
@@ -52,7 +56,12 @@ class Home extends Component {
                     <h1 className='company-name'>AJACKUS</h1>
                 </div>
                 <div className='add-button-container'>
-                <button type='button' className='add-button'>Add User</button>
+                    <button type='button' className='add-button'>Add User</button>
+                </div>
+                <div className='users-container'>
+                    {usersList.map(each => (
+                        <Users userDetails={each}/>
+                    ))}
                 </div>
             </div>
         )

@@ -1,0 +1,77 @@
+.user-container {
+    width: 100%;
+    height: 120px;
+    border: solid;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: solid 1px #888080;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    color: #888080;
+}
+
+.name {
+    font-family: "Roboto";
+    font-size: 15px;
+    color: #130548;
+}
+
+.username {
+    font-family: "Roboto";
+    font-size: 12px;
+    color: #e1581d;
+    margin: 5px;
+}
+
+.details-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: "Roboto";
+    font-size: 15px;
+}
+
+.id {
+    color: #f90b0b;
+    margin-right: 30px;
+}
+
+.email {
+    color: #28067e;
+    margin-right: 30px;
+}
+
+.company {
+    color: #d7770a;
+    margin-right: auto;
+
+}
+
+.edit-delete-button {
+    border: none;
+    background-color: transparent;
+}
+
+.edit {
+    font-size: 25px;
+    color: #191039;
+}
+
+.delete {
+    font-size: 25px;
+    color: #191039;
+}

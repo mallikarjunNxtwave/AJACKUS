@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Components/Home'
-import Error  from './Components/NotFound';
+import Error  from './Components/Error';
 
 
 const App = () => {
