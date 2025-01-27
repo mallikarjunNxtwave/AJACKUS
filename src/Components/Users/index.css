@@ -75,3 +75,40 @@
     font-size: 25px;
     color: #191039;
 }
+
+.delete-popup {
+    width: 250px;
+    height: 150px;
+    background-color: #130548;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-popup-text {
+    font-family: "Roboto";
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.delete-popup-yes {
+    width: 50px;
+    height: 25px;
+    margin-right: 5px;
+    border: solid 1px #ffffff;
+    border-radius: 3px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.delete-popup-no {
+    width: 50px;
+    height: 25px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #130548;
+}

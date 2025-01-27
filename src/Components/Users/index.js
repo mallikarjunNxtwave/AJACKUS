@@ -1,11 +1,40 @@
 import { CgProfile } from "react-icons/cg";
 import { MdEdit, MdDelete } from "react-icons/md";
+import Popup from 'reactjs-popup';
 import './index.css'
 
 const Users = props => {
-    const { userDetails } = props
+    const { userDetails, deleteUser } = props
     const { id, name, username, email, company } = userDetails
-    console.log(userDetails)
+
+    const onClickYes = () => {
+        deleteUser(id)
+        
+    }
+
+    const deletePopup = () => (
+        <Popup
+            modal
+            trigger={
+                <button type="button" className="edit-delete-button">
+                    <MdDelete className="delete" />
+                </button>
+            }
+        >
+            {close => (
+                <div className="delete-popup">
+                    <p className="delete-popup-text">Are you sure ?</p>
+                    <div>
+                        <button className="delete-popup-yes" onClick={() => {
+                            onClickYes();
+                            close();
+                        }}>Yes</button>
+                        <button className="delete-popup-no" onClick={() => close()}>No</button>
+                    </div>
+                </div>
+            )}
+        </Popup>
+    )
     return (
         <div className="user-container">
             <div className="profile-container">
@@ -20,12 +49,10 @@ const Users = props => {
                 <button type="button" className="edit-delete-button">
                     <MdEdit className="edit" />
                 </button>
-                <button type="button" className="edit-delete-button">
-                    <MdDelete className="delete" />
-                </button>
+                {deletePopup()}
             </div>
         </div>
     )
 }
 
-export default Users
+export default Users;

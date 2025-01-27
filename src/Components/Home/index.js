@@ -52,6 +52,14 @@ class Home extends Component {
         this.GetUsers()
     }
 
+    deleteUser = async id => {
+        const {usersList} = this.state
+        const url = `https://jsonplaceholder.typicode.com/users/${id}`
+        fetch(url, {method: 'DELETE'})
+        const filteredUsers = usersList.filter(each => each.id !== id)
+        this.setState({usersList: filteredUsers})
+    }
+
     renderOutput = () => {
         const { apiStatus, usersList } = this.state
         switch (apiStatus) {
@@ -59,7 +67,7 @@ class Home extends Component {
                 return (
                     <div className='users-container'>
                         {usersList.map(each => (
-                            <Users userDetails={each} />
+                            <Users userDetails={each} deleteUser={this.deleteUser} />
                         ))}
                     </div>
                 )
