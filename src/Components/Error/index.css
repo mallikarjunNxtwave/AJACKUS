@@ -1,0 +1,27 @@
+.notfound-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto";
+}
+
+.notfound-error-icon {
+    width: 100px;
+    height: 100px;
+    color: #333131;
+}
+
+.notfound-heading {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ba0c0c;
+}
+
+.notfound-description {
+    font-size: 20px;
+    color: #655e5e;
+    margin-top: 5px;
+}

@@ -1,42 +1,62 @@
+// Import necessary dependencies
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdEdit, MdDelete } from "react-icons/md";
 import Popup from 'reactjs-popup';
 import './index.css'
 
+// Define the Users component
 const Users = props => {
+    // Destructure props
+    const { userDetails, deleteUser, editUser, editError } = props
+    // Destructure userDetails
+    const { id, name, username, email, company } = userDetails
+
+    // Initialize state for input fields
     const [inputName, setInputName] = useState('')
     const [inputUsername, setInputUsername] = useState('')
     const [inputEmail, setInputEmail] = useState('')
     const [inputCompany, setInputcompany] = useState('')
-    const { userDetails, deleteUser, editUser, editError } = props
-    const { id, name, username, email, company } = userDetails
 
+    
+    // Define functions
     const onClickYes = () => {
         deleteUser(id)
     }
 
     const onHandleStateChange = (event, setFunction) => {
+        // Update state of input fields
         setFunction(event.target.value)
     }
 
     const onSubmitForm = event => {
+        // Prevent default form submission behavior
         event.preventDefault()
+        // Check if at least one input field has a value
         if(inputName !== '' || inputUsername !== '' || inputEmail !== '' || inputCompany !== ''){
+            // Create new user object with updated details
             const editedUser = {
                 ...(inputName && { name: inputName }),
                 ...(inputUsername && { username: inputUsername }),
                 ...(inputEmail && { email: inputEmail }),
                 ...(inputCompany && { company: inputCompany }),
               }
-              
+              // Call editUser function with user's ID and new user object
             editUser(id, editedUser)
+
+            // Reset input fields
+            setInputName('')
+            setInputUsername('')
+            setInputEmail('')
+            setInputcompany('')
         }else {
+            // Display error message if no input fields have a value
             editError('Fill at least one value on edit a User')
         }
         
     }
 
+    // Define popup components
     const deletePopup = () => (
         <Popup
             modal
@@ -100,6 +120,7 @@ const Users = props => {
         </Popup>
     )
 
+    // Render the component
     return (
         <div className="user-container">
             <div className="profile-container">
@@ -118,29 +139,5 @@ const Users = props => {
     )
 }
 
+// Export the Users component
 export default Users;
-
-/*
-<form className="edit-form">
-                    <div className="input-container">
-                        <label htmlFor="NAME" className="label-text">NAME</label>
-                        <input id="NAME" type="text" placeholder="Name" className="input-box" />
-                    </div>
-                    <div className="input-container">
-                        <label htmlFor="USERNAME" className="label-text">USERNAME</label>
-                        <input id="USERNAME" type="text" placeholder="Username" className="input-box" />
-                    </div>
-                    <div className="input-container">
-                        <label htmlFor="EMAIL" className="label-text">EMAIL</label>
-                        <input id="EMAIL" type="text" placeholder="Email" className="input-box" />
-                    </div>
-                    <div className="input-container">
-                        <label htmlFor="COMPANY" className="label-text">COMPANY</label>
-                        <input id="COMPANY" type="text" placeholder="Company" className="input-box" />
-                    </div>
-                    <div className="form-button-container">
-                        <button type="submit">submit</button>
-                        <button type="button">Cancel</button>
-                    </div>
-                </form>
-*/
