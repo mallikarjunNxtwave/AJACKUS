@@ -194,7 +194,7 @@ class Home extends Component {
     onSubmitForm = async event => {
         event.preventDefault()
         const { newName, newUsername, newEmail, newCompany, mailValidMsg } = this.state
-        if (newName !== '' && newUsername !== '' && mailValidMsg === '' && newCompany !== '') {
+        if (newName !== '' && newUsername !== '' && newEmail !== '' && mailValidMsg === '' && newCompany !== '') {
             try {
                 // Create a new user in the API
                 const url = 'https://jsonplaceholder.typicode.com/users'
